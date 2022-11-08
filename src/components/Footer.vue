@@ -1,77 +1,66 @@
 <template>
-  <footer>
-    <div class="col">
-        <img class="logo" src="../assets/logo.png">
+  
+    <div class="container">
+        <img class="logo" src="../assets/orangy.jpg">
         <h4>Contact</h4>
         <p><strong>Address:</strong> 4B Education Close,Unilag Estate Isheri olowora</p>
         <p><strong>Phone:</strong> +2349084561758 /(+12) 012345</p>
         <p><strong>Hours:</strong>10:00- 18:00, Mon-Sat</p>
         <div class="follow">
             <h4>Follow us</h4>
-            <div class="icon">
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-pinterest"></i>
-                <i class="fab fa-youtube"></i>
+                <ul>
+                 <li> <font-awesome-icon icon="fa-brands fa-square-facebook" />facebook</li>
+                  <li> <font-awesome-icon icon="fa-brands fa-twitter" /></li>
+                 <li> <font-awesome-icon icon="fa-brands fa-instagram" /> </li>
+                <li> <font-awesome-icon icon="fa-brands fa-pinterest-p" /></li>
+                 <li><font-awesome-icon icon="fa-brands fa-square-youtube" /> Youtube</li>
+                </ul>
             </div>
-        </div>
-    </div>
-    <div class="col">
-        <h4>About</h4>
-        <a href="">About us</a>
-        <a href="">Delivery Information</a>
-        <a href="">Privacy Policy</a>
-        <a href="">Terms & Conditions</a>
-        <a href="">Contact us</a>
-    </div>
-    <div class="col">
-        <h4>My Account</h4>
-        <a href="">Sign In</a>
-        <a href="">View Cart</a>
-        <a href="">My Wishlist</a>
-        <a href="">Track My Order</a>
-        <a href="">Help</a>
-    </div>
 
-    <div class="col install">
-        <h4>Install App</h4>
-        <p>From App Store or Google Play</p>
-        <div class="row">
-            <img src="" alt="">
-            <img src="" alt="">
-        </div>
-        <p>Secure Payment Gateways</p>
-        <img src="" alt="">
     </div>
-
-    <div class="copyright">
-     <p>@2022, Feranmi Mart</p>
-    </div>
-  </footer>
+    
 </template>
 
 <script>
+// import {ref} from "vue"
 export default {
-
+//  setup(){
+//       const showP =ref(false)
+//       return{
+//         showP
+//       }
+//     }
 }
 </script>
 
 <style scope>
-footer{
+.footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-footer .col{
+.footer .col{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
 }
-footer .logo{
+.footer .logo{
     margin-bottom: 30px;
 }
-
+.follow h4{
+    font-size: 14px;
+    padding-bottom:20px;
+}
+.follow p{
+    font-size: 13px;
+    margin:0 0 8px 0;
+}
+.followa {
+    font-size: 13px;
+    text-decoration: none;
+    margin: 0 0 8px 0;
+    color:black;
+}
 
 </style>

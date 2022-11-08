@@ -1,27 +1,27 @@
 <template>
-<section class="product1">
+<section class="product1 container">
   <h2>Dish Of the day</h2>
   <p>Nutriously cooked with healthy natural spice</p>
-  <div class="pro-container">
-    <div  v-for="(Recipe , index) in Recipes" :key="index" class="pro">
-      <img :src="Recipe.image">
-      <div class="des">
-        <span class="tribe">{{Recipe.tribe}}</span>
-        <h5 class="food">{{Recipe.food}}</h5>
+  <div class="cards container">
+    <div  v-for="(Recipe, index) in Recipes" :key="index" class="card">
+      <img :src="Recipe.image" class="images">
+       <div class="card-content">
+        <p class="tribe">{{Recipe.tribe}}</p>
+        <p class="food">{{Recipe.food}}</p>
         <div class="rev">
-          <i class="star">{{Recipe.star}} </i>
+          <span v-for="(star, index) in Recipe.star" :key="index" class="star" ><font-awesome-icon icon="fa-solid fa-star" /></span>
         </div>
-        <h4 class="price">&#8358;{{Recipe.price}}</h4>
+        <div class="card-info">
+        <h5 class="price">&#8358;{{Recipe.price}}</h5>
+        <i class="material-icons c-pointer" @click="addToCart(Recipe)">local_grocery_store</i>
       </div>
-      <a href=""><i class="shop"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-      </svg></i></a>
+       </div>
     </div>
 
-<!-- <img src="../assets/colourful.jpg" alt=""> -->
-
+  
   </div>
   </section>
+
 </template>
 
 
@@ -33,11 +33,12 @@ export default {
   name:'Dish',
   data(){
     return{
+      selectedItems: [],
       Recipes:[
-        {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
-        {image: require('../assets/eat-2834549__480.jpg'), tribe:'Northern dish',food:'Ikokore', star:'star', price: '2000',shop:''},
-        {image: require('../assets/colourful.jpg'), tribe:'Northern dish',food:'Ikokore', star:'star', price: '2000',shop:''},
-        {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
+        {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Moimoi', star: 2, price: '4500',shop:''},
+        {image: require('../assets/eat-2834549__480.jpg'), tribe:'Northern dish',food:'Ikokore', star:3, price: '2000',shop:''},
+        {image: require('../assets/colourful.jpg'), tribe:'Northern dish',food:'Akara', star:3, price: '1500',shop:''},
+        {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'3', price: '2000',shop:''},
         {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
         {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
          {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
@@ -46,96 +47,113 @@ export default {
         {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
         {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''},
         {image: require('../assets/Brown-eggs.jpg'),tribe:'Northern dish', food:'Ikokore', star:'star', price: '2000',shop:''}
-
         
-
-      ]
+      ],     
+    }
+  },
+  methods: {
+    addToCart (recipe){
+      // this.$store.dispatch( 'addRecipeToCart', {
+      //   recipe:this.recipe,
+      //   quantity:1
+      // })
+      // Route / Navigation Guard
+    
+      this.selectedItems.push(recipe)
+      const value = JSON.stringify(this.selectedItems)
+      localStorage.setItem('product', value)
     }
   }
+   
 }
 </script>
 
-<style>
-.product1{
-  text-align: center;
-  padding:  040px;
-}
-.product1 .pro{
-  width: 23%;
-  min-width: 250px;
-  padding: 0 12px;
-  border: 1px solid #cce7d0;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
-  margin:15px 0;
-  transition: 0.2s ease;
-  position: relative;
-}
-.product1 .pro:hover{
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+<style scoped>
 
+.cards{
+  margin: 0 auto;
+  max-width:1000px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr );
+  padding:15px;
+  border-radius: 20px 20px 0px 0px;
+  gap: 20px;
+  
 }
-.product1 .pro img{
-  width: 100%;
-  border-radius: 20px;
+.card{
+  
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  border-radius:  0px 0px 20px 20px;
 }
-.product1 .pro .des{
-  text-align: start;
-  padding:10px 0;
+.images{
+  height: 30vh;
 }
-.product1 .pro .des span{
-  color: #0606;
-  font-size: 12px;
+.card img {
+  width:100%;
+  display:block;
+  object-fit:cover;
+  /* border-radius: 20px 20px 0px 0px; */
 }
-.product1 .pro .des h5{
-  padding: 7px;
-  color: #1a1a1a;
+ .card-info{
+  /* padding:15px; */
+  display:flex;
+  justify-content: space-between;
   font-size: 14px;
+  align-items: center;
+  border-radius: 0px 0px 20px 20px;
+  background-color: #eeeeee9e;
+ }
+  .card-info i {
+    display:flex;
+    color:green;
+    margin-right:8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: #e8f6ae;
+    color: #088178;
+   justify-content: center;
+   align-items: center;
+  }
+  .tribe, .food, .rev, .price {
+    padding: 0px 10px;
+  }
+  
+  .card-content{
+    border-radius: 0px 0px 20px 20px;
+    /* background-color: red; */
+  }
+@media (min-width: 992px){
+.cards{ 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr );
+ }
 }
-.product1 h2{
-  padding: 7px;
-  color: #1a1a1a;
-  font-size: 25px;
+@media (min-width: 768px) and (max-width: 991px){
+.cards{ 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr );
+ }
+ .product1 h2 {
+  text-align: center;
 }
 .product1 p{
-  font-size: 17px;
+  text-align: center;
 }
-.product1 .pro .des i{
-  font-size: 12px;
-  color:rgba(243, 181, 25) ;
 }
-.product1 .pro .des h4{
-  padding-top: 7px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #088178;
+@media (max-width:767px){
+ .cards{ 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr );
+ }
 }
-.product1 .pro .shop{
-  width: 40px;
-  height: 40px;
-  line-height:40px;
-  border-radius: 50px;
-  background-color: #e8f6ae;
-  font-weight:500;
-  color: #088178;
-  border: 1px solid #cce7d0;
-  position: absolute;
-  bottom: 20px;
-  right: 10px;
+@media (max-width:567px) {
+  .cards{
+  display: grid;
+  grid-template-columns: 1fr;
+  padding:15px;
+  gap: 20px;
+  
 }
-.product1 .pro-container{
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-  flex-wrap: wrap;
-}
-@media (max-width:799px){
-  .product1 .pro-container{
-    display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  flex-wrap: wrap;
-  }
 }
 </style>
